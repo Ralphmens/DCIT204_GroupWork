@@ -39,12 +39,12 @@ public class App {
                 case 6:
                     MergeSort.main(null);
                     break;
-//                case 7:
-//                    PrimsMST.main(null);
-//                    break;
-//                case 8:
-//                    Quickhull.main(null);
-//                    break;
+               case 7:
+                   PrimsMST.main(null);
+                   break;
+               case 8:
+                   Quickhull.main(null);
+                   break;
                 case 9:
                     QuickSort.main(null);
                     break;
