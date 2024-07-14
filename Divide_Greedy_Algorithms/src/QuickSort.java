@@ -1,52 +1,62 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class QuickSort {
 
-    public void sort(int[] arr) {
-        quickSort(arr, 0, arr.length - 1);
-    }
-
-    private void quickSort(int[] arr, int low, int high) {
-        if (low < high) {
-            int pi = partition(arr, low, high);
-            quickSort(arr, low, pi - 1);
-            quickSort(arr, pi + 1, high);
+    public static void quickSort(int[] array, int lowIndex, int highIndex) {
+        if (lowIndex < highIndex) {
+            int partitionIndex = partition(array, lowIndex, highIndex);
+            quickSort(array, lowIndex, partitionIndex - 1);
+            quickSort(array, partitionIndex + 1, highIndex);
         }
     }
 
-    private int partition(int[] arr, int low, int high) {
-        int pivot = arr[high];
-        int i = (low - 1);
-        for (int j = low; j < high; j++) {
-            if (arr[j] < pivot) {
+    public static int partition(int[] array, int lowIndex, int highIndex) {
+        int pivot = array[highIndex];
+        int i = (lowIndex - 1); // Index of smaller element
+
+        for (int j = lowIndex; j < highIndex; j++) {
+            if (array[j] <= pivot) {
                 i++;
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
+
+                // Swap array[i] and array[j]
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
             }
         }
-        int temp = arr[i + 1];
-        arr[i + 1] = arr[high];
-        arr[high] = temp;
+
+        // Swap array[i+1] and array[highIndex] (or pivot)
+        int temp = array[i + 1];
+        array[i + 1] = array[highIndex];
+        array[highIndex] = temp;
+
         return i + 1;
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the number of elements:");
-        int n = scanner.nextInt();
-        int[] arr = new int[n];
-        System.out.println("Enter the elements:");
-        for (int i = 0; i < n; i++) {
-            arr[i] = scanner.nextInt();
+
+        System.out.print("Enter the number of elements in the array: ");
+        int numberOfElements = scanner.nextInt();
+
+        int[] arrayToSort = new int[numberOfElements];
+        System.out.println("Enter the elements of the array:");
+        for (int i = 0; i < numberOfElements; i++) {
+            arrayToSort[i] = scanner.nextInt();
         }
 
-        QuickSort qs = new QuickSort();
         long startTime = System.nanoTime();
-        qs.sort(arr);
+
+        quickSort(arrayToSort, 0, numberOfElements - 1);
+
         long endTime = System.nanoTime();
-        System.out.println("Sorted array: " + Arrays.toString(arr));
-        System.out.println("Execution time: " + (endTime - startTime) + " nanoseconds");
+        long duration = (endTime - startTime); // Time in nanoseconds
+
+        System.out.println("Sorted array:");
+        for (int element : arrayToSort) {
+            System.out.print(element + " ");
+        }
+        System.out.println();
+        System.out.println("Quick Sort algorithm took " + duration + " nanoseconds (" + (duration / 1000000) + " milliseconds).");
     }
 }
