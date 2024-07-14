@@ -24,9 +24,9 @@ public class App {
                 case 1:
                     TSP.main(null);
                     break;
-//                case 2:
-//                    ClosestPairProblem.main(null);
-//                    break;
+               case 2:
+                   ClosestPairProblem.run();
+                   break;
                 case 3:
                     Graph.main(null);
                     break;
